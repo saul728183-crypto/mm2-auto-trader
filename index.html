@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MM2 Trade Assistant</title>
+<style>
+body{background:#111827;color:white;font-family:Arial;padding:20px}
+h1{color:#60a5fa}
+input,button{padding:12px;margin:5px 0;border:0;border-radius:8px;font-size:16px}
+input{width:90%;background:#263244;color:white}
+button{background:#2563eb;color:white;width:100%}
+.card{background:#1f2937;padding:15px;border-radius:12px;margin:15px 0}
+.result{font-size:20px;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>MM2 Trade Assistant</h1>
+<p>Calculadora de trocas do Murder Mystery 2</p>
+
+<div class="card">
+<h2>Seus itens</h2>
+<input id="mine" placeholder="Valor dos seus itens">
+</div>
+
+<div class="card">
+<h2>Itens do outro jogador</h2>
+<input id="theirs" placeholder="Valor dos itens dele">
+</div>
+
+<div class="card">
+<h2>Resultado da troca</h2>
+<p id="result" class="result">Preencha os valores.</p>
+<p id="difference"></p>
+</div>
+
+<button onclick="calculate()">ANALISAR TROCA</button>
+
+<script>
+function calculate(){
+ const a=Number(document.getElementById('mine').value);
+ const b=Number(document.getElementById('theirs').value);
+ const r=document.getElementById('result');
+ const d=document.getElementById('difference');
+ if(!Number.isFinite(a)||!Number.isFinite(b)||a<=0||b<=0){
+ r.textContent="Digite valores válidos.";
+ d.textContent="";
+ return;
+ }
+ const diff=b-a;
+ const percent=diff/a*100;
+ r.textContent=diff>0?"VOCÊ GANHA!":diff<0?"VOCÊ PERDE!":"TROCA JUSTA!";
+ d.textContent="Diferença: "+diff.toFixed(2)+" ("+percent.toFixed(1)+"%)";
+}
+</script>
+</body>
+</html>
